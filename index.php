@@ -18,7 +18,10 @@
         $sno = $_GET['delete'];
         $sql = "DELETE FROM `notes` WHERE `sno` = $sno";
         $result = mysqli_query($conn, $sql);
-        $delete = true;
+        if ($result) {
+            header('Location: http://localhost/curd/index.php');
+            exit();
+        }
     }
 
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -135,12 +138,6 @@
         if ($update) {
             echo '<div class="alert alert-info alert-dismissible fade show" role="alert">
             <strong>Success! </strong>Your note was updated succesfully.
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>';
-        }
-        if ($delete) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>Success! </strong>Your note was deleted succesfully.
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>';
         }
